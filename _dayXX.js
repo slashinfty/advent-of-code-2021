@@ -14,3 +14,5 @@ console.log(`Part One...\nSolution: ${solutionOne}`);
 // part two work
 let solutionTwo;
 //console.log(`Part Two...\nSolution: ${solutionTwo}`);
+
+console.log(`Finished at ${new Date(Date.now()).toString()}`)
