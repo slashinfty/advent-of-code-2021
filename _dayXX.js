@@ -1,8 +1,6 @@
 // data to test
-// part one
-const input = '';
-// part two, if necessary
-//const input = '';
+// expected output: 
+let input;
 
 // actual data (map at the end if necessary)
 //const input =  require('fs').readFileSync(require('path').resolve(__dirname, './inputs/dayXX'), 'utf-8').split('\n').filter(Boolean);
