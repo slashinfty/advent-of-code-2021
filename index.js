@@ -1,4 +1,1 @@
-// 'Day XX finished @ TIMESTAMP'
-const arr = [];
-
-arr.forEach(a => console.log(a));
+console.log('Run node dayXX.js');
