@@ -6,7 +6,7 @@ const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./
 
 // part one work
 // expected outcome for test: 7
-let solutionOne = input.reduce((a, b, i) => a += i !== 0 && b > input[i - 1], 0);
+let solutionOne = input.reduce((a, b, i) => a += i > 0 && b > input[i - 1], 0);
 console.log(`Part One...\nSolution: ${solutionOne}`);
 
 // part two work
