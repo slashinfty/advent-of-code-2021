@@ -17,9 +17,8 @@ const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./
 let position = [0, 0];
 input.forEach(command => {
     const value = Number(/(?<=\s)\d+$/.exec(command)[0]);
-    if (command.startsWith('forward')) position[0] += value; // increase horizontal position
-    else if (command.startsWith('down')) position[1] += value; // increate depth
-    else if (command.startsWith('up')) position[1] -= value; // decrease depth
+    position[0] += command.startsWith('f') ? value : 0;
+    position[1] += command.startsWith('d') ? value : command.startsWith('u') ? -value : 0;
 });
 let solutionOne = position[0] * position[1];
 console.log(`Part One...\nSolution: ${solutionOne}`);
@@ -31,12 +30,9 @@ position = [0, 0];
 let aim = 0;
 input.forEach(command => {
     const value = Number(/(?<=\s)\d+$/.exec(command)[0]);
-    if (command.startsWith('forward')) { // increase horizontal position and depth
-        position[0] += value;
-        position[1] += aim * value;
-    }
-    else if (command.startsWith('down')) aim += value; // increase aim
-    else if (command.startsWith('up')) aim -= value; // decrease aim
+    aim += command.startsWith('d') ? value : command.startsWith('u') ? -value : 0;
+    position[0] += command.startsWith('f') ? value : 0;
+    position[1] += command.startsWith('f') ? value * aim : 0;
 });
 let solutionTwo = position[0] * position[1];
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);
