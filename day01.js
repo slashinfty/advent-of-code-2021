@@ -7,11 +7,11 @@ const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./
 // part one work
 // task: count the number of times a depth measurement increases from the previous measurement.
 // expected outcome for test: 7
-let solutionOne = input.reduce((a, b, i) => a += i > 0 && b > input[i - 1], 0);
+let solutionOne = input.reduce((a, b, i) => a + (i > 0 && b > input[i - 1]), 0);
 console.log(`Part One...\nSolution: ${solutionOne}`);
 
 // part two work
 // task: consider sums of a three-measurement sliding window, and count the number of times the sum of measurements in this sliding window increases from the previous sum
 // expected outcome for test: 5
-let solutionTwo = input.reduce((a, b, i) => a += i > 2 && b > input[i - 3], 0);
+let solutionTwo = input.reduce((a, b, i) => a + (i > 2 && b > input[i - 3]), 0);
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);

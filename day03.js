@@ -36,12 +36,12 @@ let oxygenArray = [...input];
 let co2Array = [...input];
 bitCount = 0;
 for (let i = 0; i < input[0].length; i++) {
-    bitCount = oxygenArray.reduce((a, b) => a += Number(b[i]), 0);
+    bitCount = oxygenArray.reduce((a, b) => a + Number(b[i]), 0);
     oxygenArray = oxygenArray.filter(e => Number(e.charAt(i)) === Number(bitCount >= oxygenArray.length / 2));
     if (oxygenArray.length === 1) break;
 }
 for (let i = 0; i < input[0].length; i++) {
-    bitCount = co2Array.reduce((a, b) => a += Number(b[i]), 0);
+    bitCount = co2Array.reduce((a, b) => a + Number(b[i]), 0);
     co2Array = co2Array.filter(e => Number(e.charAt(i)) === Number(!(bitCount >= co2Array.length / 2)));
     if (co2Array.length === 1) break;
 }
