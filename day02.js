@@ -17,8 +17,9 @@ const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./
 let position = [0, 0];
 input.forEach(command => {
     const value = Number(/(?<=\s)\d+$/.exec(command)[0]);
-    position[0] += command.startsWith('f') ? value : 0;
-    position[1] += command.startsWith('d') ? value : command.startsWith('u') ? -value : 0;
+    position[0] += command.startsWith('f') * value;
+    position[1] += command.startsWith('d') * value;
+    position[1] -= command.startsWith('u') * value;
 });
 let solutionOne = position[0] * position[1];
 console.log(`Part One...\nSolution: ${solutionOne}`);
@@ -30,9 +31,10 @@ position = [0, 0];
 let aim = 0;
 input.forEach(command => {
     const value = Number(/(?<=\s)\d+$/.exec(command)[0]);
-    aim += command.startsWith('d') ? value : command.startsWith('u') ? -value : 0;
-    position[0] += command.startsWith('f') ? value : 0;
-    position[1] += command.startsWith('f') ? value * aim : 0;
+    aim += command.startsWith('d') * value;
+    aim -= command.startsWith('u') * value;
+    position[0] += command.startsWith('f') * value;
+    position[1] += command.startsWith('f') * value * aim;
 });
 let solutionTwo = position[0] * position[1];
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);
