@@ -33,7 +33,7 @@ console.log(`Part One...\nSolution: ${solutionOne}`);
 // task: filter input most common bit in each position (and least common bit) and multiply the results
 // expected outcome for test: 230
 let oxygenArray = [...input];
-let CO2Array = [...input];
+let co2Array = [...input];
 bitCount = 0;
 for (let i = 0; i < input[0].length; i++) {
     bitCount = oxygenArray.reduce((a, b) => a += Number(b[i]), 0);
@@ -41,11 +41,11 @@ for (let i = 0; i < input[0].length; i++) {
     if (oxygenArray.length === 1) break;
 }
 for (let i = 0; i < input[0].length; i++) {
-    bitCount = CO2Array.reduce((a, b) => a += Number(b[i]), 0);
-    CO2Array = CO2Array.filter(e => Number(e.charAt(i)) === Number(!(bitCount >= CO2Array.length / 2)));
-    if (CO2Array.length === 1) break;
+    bitCount = co2Array.reduce((a, b) => a += Number(b[i]), 0);
+    co2Array = co2Array.filter(e => Number(e.charAt(i)) === Number(!(bitCount >= co2Array.length / 2)));
+    if (co2Array.length === 1) break;
 }
 let oxygen = parseInt(oxygenArray[0], 2);
-let CO2 = parseInt(CO2Array[0], 2);
-let solutionTwo = oxygen * CO2;
+let co2 = parseInt(co2Array[0], 2);
+let solutionTwo = oxygen * co2;
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);
