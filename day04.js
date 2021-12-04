@@ -22,7 +22,7 @@
 const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./inputs/${require('path').basename(__filename).replace('.js', '')}`), 'utf-8').split('\n').filter(Boolean);
 
 // part one work
-// task: 
+// task: find first bingo board to win and multiply unmarked numbers by winning number
 // expected outcome for test: 4512
 let calls = input.shift().split(',').map(i => Number(i));
 
@@ -62,21 +62,41 @@ for (let i = 0; i < input.length; i += 5) {
     boards.push(new Board(input.slice(i, i + 5)));
 }
 let solutionOne;
-outer: for (let i = 0; i < calls.length; i++) {
+firstWinner: for (let i = 0; i < calls.length; i++) {
     let call = calls[i];
     for (let k = 0; k < boards.length; k++) {
         let board = boards[k];
         board.mark(call);
         if (board.check()) {
             solutionOne = board.sum() * call;
-            break outer;
+            break firstWinner;
         }
     }
 }
 console.log(`Part One...\nSolution: ${solutionOne}`);
 
 // part two work
-// task: 
-// expected outcome for test: 
+// task: find last board to win and multiply unmarked numbers by winning number
+// expected outcome for test: 1924
+boards = [];
+for (let i = 0; i < input.length; i += 5) {
+    boards.push(new Board(input.slice(i, i + 5)));
+}
 let solutionTwo;
+lastWinner: for (let i = 0; i < calls.length; i++) {
+    let call = calls[i];
+    for (let k = 0; k < boards.length; k++) {
+        let board = boards[k];
+        board.mark(call);
+        if (board.check()) {
+            if (boards.length !== 1) {
+                boards.splice(k, 1);
+                k--;
+            } else {
+                solutionTwo = board.sum() * call;
+                break lastWinner;
+            }
+        }
+    }
+}
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);
