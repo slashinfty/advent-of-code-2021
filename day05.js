@@ -49,9 +49,7 @@ const countDupes = arr => {
         let k = 1;
         if (JSON.stringify(arr[i]) === JSON.stringify(arr[i + k])) {
             dupeCount++;
-            do {
-                k++;
-            } while (JSON.stringify(arr[i]) === JSON.stringify(arr[i + k]));
+            do { k++; } while (JSON.stringify(arr[i]) === JSON.stringify(arr[i + k]));
         }
         i += k;
     }
