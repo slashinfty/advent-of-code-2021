@@ -1,39 +1,31 @@
 // test data
-let input = [3,4,3,1,2];
+//let input = [3,4,3,1,2];
 
 // actual data (map at the end if necessary)
-//const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./inputs/${require('path').basename(__filename).replace('.js', '')}`), 'utf-8').split('\n').filter(Boolean)[0].split(',').map(x => Number(x));
+const input =  require('fs').readFileSync(require('path').resolve(__dirname, `./inputs/${require('path').basename(__filename).replace('.js', '')}`), 'utf-8').split('\n').filter(Boolean)[0].split(',').map(x => Number(x));
 
 // part one work
-// task: 
+// task: determine number of lantern fish if they spawn every 7 days (with newborns waiting 9) after 80 days
 // expected outcome for test: 5934
-let fish = [...input];
-let newFish = 0;
+let timer = [];
+for (let i = 0; i < 9; i++) timer.push(input.reduce((a, b) => a + Number(b === i), 0));
 for (let i = 0; i < 80; i++) {
-    let newFish = 0;
-    fish = fish.map(f => {
-        if (f === 0) {
-            newFish++;
-            return 6;
-        } else return f - 1;
-    }).concat(new Array(newFish).fill(8));
+    let genNew = timer[0];
+    for (let i = 0; i < 8; i++) timer[i] = timer[i + 1];
+    timer[6] += genNew;
+    timer[8] = genNew;
 }
-let solutionOne = fish.length;
+let solutionOne = timer.reduce((a, b) => a + b, 0);
 console.log(`Part One...\nSolution: ${solutionOne}`);
 
 // part two work
-// task: 
+// task: same but after 256 days
 // expected outcome for test: 26984457539
-fish = [...input];
-newFish = 0;
-for (let i = 0; i < 256; i++) {
-    let newFish = 0;
-    fish = fish.map(f => {
-        if (f === 0) {
-            newFish++;
-            return 6;
-        } else return f - 1;
-    }).concat(new Array(newFish).fill(8));
+for (let i = 80; i < 256; i++) {
+    let genNew = timer[0];
+    for (let i = 0; i < 8; i++) timer[i] = timer[i + 1];
+    timer[6] += genNew;
+    timer[8] = genNew;
 }
-let solutionTwo = fish.length;
+let solutionTwo= timer.reduce((a, b) => a + b, 0);
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);
