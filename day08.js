@@ -59,6 +59,5 @@ console.log(`Part One...\nSolution: ${solutionOne}`);
 // part two work
 // task: part one, but instead add the 4-digit numbers
 // expected outcome for test: 61229
-//lines.forEach(l => console.log(Number(l.digits.join(''))));
 let solutionTwo = lines.reduce((a, b) => a + Number(b.digits.join('')), 0);
 console.log(`\nPart Two...\nSolution: ${solutionTwo}`);
