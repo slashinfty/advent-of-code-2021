@@ -48,7 +48,7 @@ do {
 let solutionOne = completePaths.length;
 console.log(`Part One...\nSolution: ${solutionOne}`);
 
-// part two work (NOTE THIS CODE SUCKS)
+// part two work
 // task: 
 // expected outcome for test: 103
 let lowercaseNodes = Object.keys(nodes).filter(n => /^[a-z]+$/.test(n) && n !== 'start');
@@ -56,23 +56,20 @@ completePaths = [];
 lowercaseNodes.forEach(ln => {
     pathsToDo = nodes['start'].map(p => ['start', p]);
     do {
-        console.log(`todo: ${pathsToDo.length}`);
         let paths = [...pathsToDo];
         pathsToDo = [];
         paths.forEach(path => {
             let lastNode = path[path.length - 1];
             for (let i = 0; i < nodes[lastNode].length; i++) {
                 let p = nodes[lastNode][i];
-                if (p === 'end') {
-                    if (completePaths.find(cp => JSON.stringify(cp) === JSON.stringify([...path, p])) === undefined) completePaths.push([...path, p]);
-                    else continue;
-                } else if (p === ln && path.reduce((a, b) => a + (b === ln), 0) === 1) pathsToDo.push([...path, p]);
+                if (p === 'end') completePaths.push([...path, p]);
+                else if (p === ln && path.reduce((a, b) => a + (b === ln), 0) === 1) pathsToDo.push([...path, p]);
                 else if (path.includes(p) && /^[a-z]+$/.test(p)) continue;
                 else pathsToDo.push([...path, p]);
             }
         });
     } while (pathsToDo.length > 0);
-    console.log(`complete: ${completePaths.length}`);
+    completePaths = [...new Set(completePaths.map(p => JSON.stringify(p)))].map(p => JSON.parse(p));
 });
 
 let solutionTwo = completePaths.length;
